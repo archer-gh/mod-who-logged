@@ -46,7 +46,10 @@ void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
             break;
     }
 
-    LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), std::to_string(playerLevel), playerClass.c_str(), playerIP.c_str(), playerAccountID);
+    if (playerIP != "bot")
+    {
+        LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), std::to_string(playerLevel), playerClass.c_str(), playerIP.c_str(), playerAccountID);
+    }
 }
 
 void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
@@ -60,6 +63,9 @@ void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
         uint32 playerAccountID = session->GetAccountId();
         std::string playerName = player->GetName();
 
-        LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
+        if (playerIP != "bot")
+        {
+            LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
+        }
     }
 }
